@@ -8,7 +8,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -48,7 +51,7 @@
                 <input type="text" class="form-control" id="link-to-photo" required>
               </div>
             </form>
-            <form id="questionsId"></form>
+            <form id="questionsBox"></form>
           </div>
           <button type="submit" class="btn btn-primary submit">Submit</button>
         </div>
@@ -68,6 +71,8 @@
 
 <!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
 <script type="text/javascript">
+$(document).ready(function(){
+
 
     // library of question as global variable
     
@@ -82,39 +87,60 @@
                         "on the scale of 0 to 5 how annoying it is for you to travel around with little or absolutely no plans?",
                         "on the scale of 0 to 5 how much does it bother you meeting total strangers?" 
                     ];
-
+    //object to track answers
+    var trackAnswers ={}
+    function initialAnswers(){
+      for (var i = 0; i < questionList.length; i++) {
+        trackAnswers["answer-"+i] = null;
+      }
+      
+    }
+    
     //dynamically creating the dropdown questions    
     function makeQuestions (questionList){
       for (var i = 0; i < questionList.length; i++) {
-
-        var newDiv= html('<label calss="question" value = "">' + questionList[i] +'</label>'+
+        console.log(questionList[i])
+          var newDiv = $('<label calss="question" value = "">' + questionList[i] +'</label>'+
                         '<div class="dropdown">'+
+                          '<i class="dropdown-arrow dropdown-arrow-inverse"></i>'+
                           '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown button'+
                           '</button>'+
-                            '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" required id="ans-' + i + '">'+
-                                '<a class="dropdown-item" href="#">1 (very little) </a>'+
-                                '<a class="dropdown-item" href="#">2 </a>'+
-                                '<a class="dropdown-item" href="#">3 (netral)</a>'+
-                                '<a class="dropdown-item" href="#">4</a>'+
-                                '<a class="dropdown-item" href="#">5 (Pretty much!)</a>'+
-                            '</div>'+
+                            '<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" required value='+(i+1)+'>'+
+                                '<li><a class="dropdown-item" href="#" value ="1" >1 (very little) </a></li>'+
+                                '<li><a class="dropdown-item" href="#" value ="2" >2 </a></li>'+
+                                '<li><a class="dropdown-item" href="#" value ="3" >3 (netral)</a></li>'+
+                                '<li><a class="dropdown-item" href="#" value ="4" >4</a></li>'+
+                                '<li><a class="dropdown-item" href="#" value ="5" >5 (Pretty much!)</a></li>'+
+                            '</ul>'+
                           '</div>');
-        $("#questionId").append(newDiv);
+          $("#questionsBox").append(newDiv);
       }
     }
     //calling the function to execute it
     makeQuestions (questionList);
+    //initialize answers tracker object
+    initialAnswers();
+    console.log("track answers  :" , trackAnswers);
+
+$('.dropdown-menu li > a').click(function(event){
+    var res = $('#dropdownMenuButton').text(this.innerHTML);
+    var answer = $(this).attr('value');
+    console.log(res);
+    console.log($(this).attr('value'));
+    console.log($(this).parent().parent().attr('value'));
+});
+
 
 
     $(".submit").on("click", function(event) {
       event.preventDefault();
       // Here we grab the form elements
-      var answers =[];
+      // var answers =[];
 
-      for (var i = 0; i < questionList.length; i++) {
+      // for (var i = 0; i < questionList.length; i++) {
         
-        var ans = $('#ans-'+i)        
-      }
+      //   var ans = $('#ans-'+i)        
+      // }
 
 
 
@@ -154,10 +180,12 @@
 
     });
 
+});
+
 </script>
 
 
-<label calss="question" value = "">question</label>
+<!-- <label calss="question" value = "">question</label>
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Dropdown button
@@ -169,4 +197,4 @@
     <a class="dropdown-item" href="#">4</a>
     <a class="dropdown-item" href="#">5 (Pretty much!)</a>
   </div>
-</div>
+</div> -->
