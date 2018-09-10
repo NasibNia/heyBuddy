@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reservation Page</title>
+
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="jumbotron">
+      <h1 class="text-center"><span class="fa fa-icon" style="font-size:60px;color:red;"></span> Hey Buddy</h1>
+      <hr>
+      <!-- <h2 class="text-center">Take the Survey</h2> -->
+      <br>
+
+      <!-- <div class="text-center">
+        <a href="/tables"><button class="btn btn-lg btn-primary"><span class="fa fa-list-alt"></span> View Tables</button></a>
+        <a href="/"><button class="btn btn-lg btn-default"><span class="fa fa-home"></span></button></a>
+      </div>
+    </div> -->
+
+    <div class="row">
+      <div class="col-lg-12">
+
+        <!-- Reservation Page -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Survay Questions</h4>
+          </div>
+          <div class="panel-body">
+
+            <form role="form">
+              <div class="form-group">
+                <label for="your-name">Name</label>
+                <input type="text" class="form-control" id="your-name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="link-to-photo">Link To Photo</label>
+                <input type="text" class="form-control" id="link-to-photo" required>
+              </div>
+            </form>
+            <form id="questionsId"></form>
+          </div>
+          <button type="submit" class="btn btn-primary submit">Submit</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <p><a href="/api/buddies">API Buddies Link</a> | <a href="https://github.com/NasibNia/heyBuddy" target="_blank" >GitHub Repo</a> </p>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+<!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
+<script type="text/javascript">
+
+    // library of question as global variable
+    
+    var questionList = ["on the scale of 0 to 5 how much do you enjoy being stoned",
+                        "on the scale of 0 to 5 how orginized are you?",
+                        "on the scale of 0 to 5 how much do you enjoy following sequential tasks?",
+                        "on the scale of 0 to 5 how much do you enjoy struggling with unknowns?",
+                        "on the scale of 0 to 5 how much do you enjoy hanging out over a beer",
+                        "on the scale of 0 to 5 how much do you enjoy arts, colors, music, ...",
+                        "on the scale of 0 to 5 how much do you enjoy board games?",
+                        "on the scale of 0 to 5 how much do you enjoy reding books or listening to audio books?",
+                        "on the scale of 0 to 5 how annoying it is for you to travel around with little or absolutely no plans?",
+                        "on the scale of 0 to 5 how much does it bother you meeting total strangers?" 
+                    ];
+
+    //dynamically creating the dropdown questions    
+    function makeQuestions (questionList){
+      for (var i = 0; i < questionList.length; i++) {
+
+        var newDiv= html('<label calss="question" value = "">' + questionList[i] +'</label>'+
+                        '<div class="dropdown">'+
+                          '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown button'+
+                          '</button>'+
+                            '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" required id="ans-' + i + '">'+
+                                '<a class="dropdown-item" href="#">1 (very little) </a>'+
+                                '<a class="dropdown-item" href="#">2 </a>'+
+                                '<a class="dropdown-item" href="#">3 (netral)</a>'+
+                                '<a class="dropdown-item" href="#">4</a>'+
+                                '<a class="dropdown-item" href="#">5 (Pretty much!)</a>'+
+                            '</div>'+
+                          '</div>');
+        $("#questionId").append(newDiv);
+      }
+    }
+    //calling the function to execute it
+    makeQuestions (questionList);
+
+
+    $(".submit").on("click", function(event) {
+      event.preventDefault();
+      // Here we grab the form elements
+      var answers =[];
+
+      for (var i = 0; i < questionList.length; i++) {
+        
+        var ans = $('#ans-'+i)        
+      }
+
+
+
+      var newBuddy = {
+        BuddyName: $("#your-name").val().trim(),
+        phoneImageUrl: $("#link-to-photo").val().trim(),
+        answers   : $()
+      };
+
+      console.log(newBuddy);
+
+      // This line is the magic. It"s very similar to the standard ajax function we used.
+      // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
+      // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
+      // depending on if a tables is available or not.
+
+      $.post("/api/buddies", newBuddy,
+        function(data) {
+
+          // If a table is available... tell user they are booked.
+          if (data) {
+            alert("Yay! You are officially booked!");
+          }
+
+          // If a table is available... tell user they on the waiting list.
+          else {
+            alert("Sorry you are on the wait list");
+          }
+
+          // Clear the form when submitting
+          // $("#your-name").val("");
+          // $("#link-to-photo").val("");
+          // $("#reserve-email").val("");
+          // $("#reserve-unique-id").val("");
+
+        });
+
+    });
+
+</script>
+
+
+<label calss="question" value = "">question</label>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" required>
+    <a class="dropdown-item" href="#">1 (very little) </a>
+    <a class="dropdown-item" href="#">2 </a>
+    <a class="dropdown-item" href="#">3 (netral)</a>
+    <a class="dropdown-item" href="#">4</a>
+    <a class="dropdown-item" href="#">5 (Pretty much!)</a>
+  </div>
+</div>
