@@ -155,15 +155,16 @@ $('.dropdown-menu li a').click(function(event){
 
         if(value === null){
           var qnumber = key.split("-");
-          alert("question" + parseInt(qnumber[1])+1 + "not answered" );
+          var realnum = parseInt(qnumber[1])+1;
+          alert("question" + realnum + "not answered" );
         } 
         answers.push(value);
       }
 
       var newBuddy = {
-        BuddyName: $("#your-name").val().trim(),
-        phoneImageUrl: $("#link-to-photo").val().trim(),
-        answers   : answers
+        name: $("#your-name").val().trim(),
+        photo: $("#link-to-photo").val().trim(),
+        scores: answers
       };
 
       console.log(newBuddy);

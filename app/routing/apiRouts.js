@@ -6,10 +6,10 @@ module.exports = function(app){
         res.json(buddyData);
     });
     app.post("/api/buddies", function(req,res){
-        console.log("other people  " +  buddyData);
+        console.log("other people  " ,  buddyData);
         var otherPeops = buddyData;
         var you = req.body;
-        console.log("you are "+ you);
+        console.log("you are ", you);
 
         findMach(you, otherPeops);
 
@@ -29,30 +29,39 @@ module.exports = function(app){
             var elem1 = parseInt(arr1[i]);
             var elem2 = parseInt(arr2[i]);
 
-            if (!(elem1.isNull() || elem2.isNull())){
+            if ((elem1 || elem2)){
+                console.log(elem1);
+                console.log(elem2);
                 if (elem1 > elem2){
                     absDiff += (elem1-elem2);
                 } else{
                     absDiff += (elem2-elem1);
                 }
+                console.log( " absDiff   " + absDiff);
             }   
         }
         return absDiff;
     }
     // function to find match between one array you and an array of objects
     function findMach(you, otherPeops){
+        console.log("inside findMatch");
+        console.log("you " + you);
+        console.log("other peaops " + otherPeops  );
         
-        var absDiff = absoluteDiff(you,otherPeops[0]);
+        var minAbsDiff = absoluteDiff(you.scores,otherPeops[0].scores);
         var id = 0;
         for (var i = 0; i < otherPeops.length; i++) {
-            var newAbsDiff = absoluteDiff(you,otherPeops[i]);
-            if( newAbsDiff < absDiff){
-                absDiff = newAbsDiff;
+            var currentAbsDiff = absoluteDiff(you.scores,otherPeops[i].scores);
+            console.log("absDiff  between you and " + otherPeops[i].name + "is " + currentAbsDiff);
+            if( currentAbsDiff < minAbsDiff){
+                minAbsDiff = currentAbsDiff;
                 id = i;
             }  
         }
-        console.log("absDiff  " + absDiff);
-        console.log("i  ", i);
+
+        console.log("Minimum absDiff is between you and " + otherPeops[id].name + " and value is " + minAbsDiff);
+        // console.log("i  ", i);
+
     return id;
     }
 };
