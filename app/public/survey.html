@@ -71,6 +71,8 @@
 
 <!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
 <script type="text/javascript">
+
+
 $(document).ready(function(){
 
 
@@ -89,6 +91,7 @@ $(document).ready(function(){
                     ];
     //object to track answers
     var trackAnswers ={}
+    var answers=[];
     function initialAnswers(){
       for (var i = 0; i < questionList.length; i++) {
         trackAnswers["answer-"+i] = null;
@@ -146,20 +149,21 @@ $('.dropdown-menu li a').click(function(event){
 
     $(".submit").on("click", function(event) {
       event.preventDefault();
-      // Here we grab the form elements
-      // var answers =[];
+      // Here we grab the form elements 
+      for (var key in trackAnswers){
+        value = trackAnswers[key];
 
-      // for (var i = 0; i < questionList.length; i++) {
-        
-      //   var ans = $('#ans-'+i)        
-      // }
-
-
+        if(value === null){
+          var qnumber = key.split("-");
+          alert("question" + parseInt(qnumber[1])+1 + "not answered" );
+        } 
+        answers.push(value);
+      }
 
       var newBuddy = {
         BuddyName: $("#your-name").val().trim(),
         phoneImageUrl: $("#link-to-photo").val().trim(),
-        answers   : $()
+        answers   : answers
       };
 
       console.log(newBuddy);
@@ -189,6 +193,8 @@ $('.dropdown-menu li a').click(function(event){
           // $("#reserve-unique-id").val("");
 
         });
+
+      
 
     });
 
