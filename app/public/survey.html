@@ -168,52 +168,28 @@ $('.dropdown-menu li a').click(function(event){
       };
 
       console.log(newBuddy);
+      window.location.href = "/";
 
-      // This line is the magic. It"s very similar to the standard ajax function we used.
-      // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
-      // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
-      // depending on if a tables is available or not.
+      $.post("/api/buddies", newBuddy, function(data) {
 
-      $.post("/api/buddies", newBuddy,
-        function(data) {
-
-          // If a table is available... tell user they are booked.
           if (data) {
-            alert("Yay! You are officially booked!");
+            alert("you are added to api!");
           }
 
-          // If a table is available... tell user they on the waiting list.
           else {
-            alert("Sorry you are on the wait list");
+            alert("something went wrong");
           }
-
-          // Clear the form when submitting
-          // $("#your-name").val("");
-          // $("#link-to-photo").val("");
-          // $("#reserve-email").val("");
-          // $("#reserve-unique-id").val("");
 
         });
+        
+      $.get("/api/match" , function(response){
+        console.log(response);  
+        alert("your mach is " + response.name);         
+      });  
 
-      
 
     });
 
 });
 
 </script>
-
-
-<!-- <label calss="question" value = "">question</label>
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" required>
-    <a class="dropdown-item" href="#">1 (very little) </a>
-    <a class="dropdown-item" href="#">2 </a>
-    <a class="dropdown-item" href="#">3 (netral)</a>
-    <a class="dropdown-item" href="#">4</a>
-    <a class="dropdown-item" href="#">5 (Pretty much!)</a>
-  </div>
-</div> -->

@@ -2,6 +2,7 @@ var buddyData = require("../data/buddy.js");
 
 
 module.exports = function(app){
+    var match;
     app.get("/api/buddies",function(req,res){
         res.json(buddyData);
     });
@@ -11,13 +12,17 @@ module.exports = function(app){
         var you = req.body;
         console.log("you are ", you);
 
-        findMach(you, otherPeops);
+        var matchId = findMach(you, otherPeops);
+        match = buddyData[matchId];
 
         buddyData.push(req.body);
+
+        
         
     });
-    app.post("/api/match",function(req,res){
-
+    console.log("match is " + match);
+    app.get("/api/match",function(req,res){        
+        return res.json(match);
     });
 
     //===========helper functions =================
