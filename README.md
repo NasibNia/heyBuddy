@@ -1,7 +1,7 @@
 # heyBuddy
 
 <!-- Put a description of what the project is -->
-# ![HeyBuddy!](https://heynewbuddy.herokuapp.com/)
+[HeyBuddy!](https://heynewbuddy.herokuapp.com/)
 Hello Full Stack! I'm here!
 
 This funn project is my first jump to full stack application building, holding together the pieces of client side and the server! It is kind of match maker to find a buddy to hang out or travel with or simply spend your time to read a bood or share thoughts. 
@@ -27,7 +27,7 @@ On the serve side application has a modular arcitecture; here is a quick snapsho
 <!-- make a link to the deployed site --> 
 <!-- [What the user will see](the link to the deployed site) -->
 ### Link to deployed site
-HeyBuddy!(https://heynewbuddy.herokuapp.com/)
+[HeyBuddy!](https://heynewbuddy.herokuapp.com/)
 
 This program is not deployed and is run on the console.
 
