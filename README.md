@@ -1,7 +1,7 @@
 # heyBuddy
 
 <!-- Put a description of what the project is -->
-# HeyBuddy!(https://heynewbuddy.herokuapp.com/)
+# ![HeyBuddy!](https://heynewbuddy.herokuapp.com/)
 Hello Full Stack! I'm here!
 
 This funn project is my first jump to full stack application building, holding together the pieces of client side and the server! It is kind of match maker to find a buddy to hang out or travel with or simply spend your time to read a bood or share thoughts. 
