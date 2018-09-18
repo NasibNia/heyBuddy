@@ -3,7 +3,7 @@
 <!-- Put a description of what the project is -->
 [HeyBuddy!](https://heynewbuddy.herokuapp.com/)
 
-![Hey Buddy](app/public/images/pic2.png");
+![Hey Buddy](../../app/public/images/pic2.png");
 
 
 Hello Full Stack! I'm here!
