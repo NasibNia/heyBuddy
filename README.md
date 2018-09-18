@@ -2,6 +2,10 @@
 
 <!-- Put a description of what the project is -->
 [HeyBuddy!](https://heynewbuddy.herokuapp.com/)
+
+![Hey Buddy]("./app/public/images/pic2.png");
+
+
 Hello Full Stack! I'm here!
 
 This funn project is my first jump to full stack application building, holding together the pieces of client side and the server! It is kind of match maker to find a buddy to hang out or travel with or simply spend your time to read a bood or share thoughts. 
@@ -11,16 +15,15 @@ On the front side it provides a survey to the user and gathers all the questions
 On the serve side application has a modular arcitecture; here is a quick snapshot:
 
 * data:
-    * * include the data stored in buddy.js. In the future, I will modify this to be connected to a mysql or sequelize database to keep track of real data in real time. But, for now the list of buddies who are lookign for a match is hardcoded in a old school way!
+     * include the data stored in buddy.js. In the future, I will modify this to be connected to a mysql or sequelize database to keep track of real data in real time. But, for now the list of buddies who are lookign for a match is hardcoded in a old school way!
 * public
-    * * This folder contain everything that could be seen by the public including the css style files, images and html files. The client side javascript files are also stored in this folder.
+     * This folder contain everything that could be seen by the public including the css style files, images and html files. The client side javascript files are also stored in this folder.
 * routing 
-    * * this folder contains the server side routing codes which dedicate the appropriate responses to the clieent requests. 
-    * * On the server side, following routes have been defined:
+     * this folder contains the server side routing codes which dedicate the appropriate responses to the clieent requests. 
+     * On the server side, following routes have been defined:
         * /api/buddies ; with both get and post methods; get method gets all the buddies information and sends them as a json object to the page, while the post method adds the new user information to the library of buddies, It then goes through a match function and find the best match base dn the responses that user has provided to the survey questions.
         * /api/match route has defined with a get method that gets the match and sends it as a json object to the page. 
-        * "/survey/" and "/" routes were also defined along with a get method to send the corresponding html pages ("/survey.html" and "/home.html") to the window.
-    * *  
+        * "/survey/" and "/" routes were also defined along with a get method to send the corresponding html pages ("/survey.html" and "/home.html") to the window.  
 * server.js
     sets up the list of dependencies for the application which inlude express, body-parser, and PORT. It also actually create a server by starting a listen method on the app.
 
@@ -29,13 +32,11 @@ On the serve side application has a modular arcitecture; here is a quick snapsho
 ### Link to deployed site
 [HeyBuddy!](https://heynewbuddy.herokuapp.com/)
 
-This program is not deployed and is run on the console.
 
-
-# Images
+<!-- # Images -->
 <!-- take a picture of the image and add it into the readme  -->
 <!-- ![image title](path or link to image) -->
-![Hey Buddy]("./app/public/images/pic2.png");
+<!-- ![Hey Buddy]("./app/public/images/pic2.png"); -->
 <!-- ![[burger](./public/assets/img/YRBURGER.gif) -->
 
 # technology used
