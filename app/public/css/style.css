@@ -1,0 +1,26 @@
+
+    .modal-pic{
+        width: auto;
+        max-width: 100%;
+        max-height: 300px;
+    }
+    
+    #parallax { 
+        background-image: url("../images/pic50.jpg");
+    
+        height: 1000px; 
+    
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    .jumbotron {
+        background-image: url("../images/pic2.png");
+        min-height: 100%;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-blend-mode: overlay;
+        }
